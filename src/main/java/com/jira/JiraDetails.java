@@ -1,12 +1,5 @@
 package com.jira;
-import com.google.gson.Gson;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.microsoft.playwright.APIResponse;
-import org.json.JSONObject;
 import org.testng.annotations.Test;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,9 +30,5 @@ public class JiraDetails {
             content.append(inputLine);
             System.out.println(content.toString());
         }
-
-
-
-
      in.close();    }
 }

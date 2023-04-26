@@ -2,7 +2,6 @@ package com.jira;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
@@ -38,14 +37,6 @@ public class TestDemo {
                 String priority= jsonNode1.get("fields").get("priority").get("name").asText();
                 String assigneeName= jsonNode1.get("fields").get("assignee").get("displayName").asText();
                 String assigneeEmail= jsonNode1.get("fields").get("assignee").get("emailAddress").asText();
-//                String type=jsonNode1.get("fields").get("description").get("content").get("type").asText();
-//                 System.out.println("fPrinting type"+type);
-
-//            String firstName;
-//            for (JsonNode atrrrr : arrayNode) {
-//                firstName = atrrrr.get("text").asText();
-//                System.out.println("fPrinting fn"+firstName);
-//            }
             writer.write(key+ "," +bugStatus+"," +projectName+"," +priority+"," +assigneeName+"," +assigneeEmail+"\n");
                 writer.close();
             System.out.println("CSV file created and updated successfully.");
@@ -62,6 +53,5 @@ public class TestDemo {
         System.out.print("Enter a defect ID: ");
         String defectId= sc.nextLine();
         testDemo.createUser(dashboardLink,defectId);
-
     }
 }
