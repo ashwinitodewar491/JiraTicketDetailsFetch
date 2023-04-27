@@ -1,2 +1,2 @@
-key,bugStatus,projectName,priority,assigneeName,assigneeEmail
-DFD-1,To Do,Demo Fetch Details,Highest,Ashwini Todewar,ashwini.todewar@joshsoftware.com
+projectName,defectKey,ticketTitle,bugStatus,priority,detailedDescription,assigneeName,assigneeEmail,
+Demo Fetch Details,DFD-1,Test 123,To Do,Highest,[Steps To reproduce:, Expected result, Actual Result],Ashwini Todewar,ashwini.todewar@joshsoftware.com

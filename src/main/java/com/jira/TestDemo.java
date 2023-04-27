@@ -10,6 +10,10 @@ import com.microsoft.playwright.options.RequestOptions;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class TestDemo {
@@ -29,15 +33,25 @@ public class TestDemo {
             File file = new File("Jiraticket.csv");
             FileWriter writer = new FileWriter(file);
             // Write header row to CSV file
-                writer.write("key,bugStatus,projectName,priority,assigneeName,assigneeEmail\n");
+                writer.write("projectName,defectKey,ticketTitle,bugStatus,priority,detailedDescription,assigneeName,assigneeEmail,\n");
             // Write Jira ticket details to CSV file
-                String key = jsonNode1.get("key").asText();
+                String defectKey = jsonNode1.get("key").asText();
                 String projectName=jsonNode1.get("fields").get("project").get("name").asText();
                 String bugStatus = jsonNode1.get("fields").get("status").get("name").asText();
                 String priority= jsonNode1.get("fields").get("priority").get("name").asText();
                 String assigneeName= jsonNode1.get("fields").get("assignee").get("displayName").asText();
                 String assigneeEmail= jsonNode1.get("fields").get("assignee").get("emailAddress").asText();
-            writer.write(key+ "," +bugStatus+"," +projectName+"," +priority+"," +assigneeName+"," +assigneeEmail+"\n");
+                int contentCount=jsonNode1.get("fields").get("description").get("content").get(0).get("content").size();
+            List<String> description=new ArrayList<>();
+                for (int i=0;i<contentCount;i++){
+                    String contentType=jsonNode1.get("fields").get("description").get("content").get(0).get("content").get(i).get("type").asText();
+                    if(contentType.equals("text")){
+                       description.add(jsonNode1.get("fields").get("description").get("content").get(0).get("content").get(i).get("text").asText());}
+                }
+                String detailedDescription=description.toString();
+                String ticketTitle=jsonNode1.get("fields").get("summary").asText();
+
+            writer.write(projectName+","+defectKey+ "," +ticketTitle+","+bugStatus+"," +priority+"," +detailedDescription+","+assigneeName+"," +assigneeEmail+"\n");
                 writer.close();
             System.out.println("CSV file created and updated successfully.");
         } catch (IOException e) {
